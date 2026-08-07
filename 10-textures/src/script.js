@@ -10,49 +10,17 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-// Object
-
-// //Create my own geometry
-// const geometry = new THREE.BufferGeometry()
-
-// //define the position of the vertexes
-// const positionArray = new Float32Array([ 
-//     0, 0, 0, //First vertex
-//     0, 1, 0, //Second vertex
-//     1, 0, 0, //Third vertex
-// ])
-
-// //reading 3 numbers at a time in position array
-// const positionAttribute = new THREE.BufferAttribute(positionArray, 3) 
-
-// geometry.setAttribute('position', positionAttribute) // position is a predefined attribute
-
 /**
- * create Bunch of random triangles
+ * Object
  */
-
-const geometry = new THREE.BufferGeometry()// this creates empty geometry
-
-//Create 50 triangles(450 values)
-
-const count = 50
-const positionsArray = new Float32Array(count * 3 *3)
-for(let i = 0; i < count *3 *3; i++)
-{
-    positionsArray[i] = (Math.random()- 0.5) * 4
-}
-
-//create an attribute and name it 'position'
-
-const positionAttribute = new THREE.BufferAttribute(positionsArray,3)
-geometry.setAttribute('position', positionAttribute)
-
-// const geometry = new THREE.BoxGeometry(1, 1, 1)
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 , wireframe : true})
+const geometry = new THREE.BoxGeometry(1, 1, 1)
+const material = new THREE.MeshBasicMaterial({ color: 0xff0000 })
 const mesh = new THREE.Mesh(geometry, material)
 scene.add(mesh)
 
-// Sizes
+/**
+ * Sizes
+ */
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
@@ -73,23 +41,32 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
-// Camera
+/**
+ * Camera
+ */
+// Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.z = 3
+camera.position.x = 1
+camera.position.y = 1
+camera.position.z = 1
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 
-// Renderer
+/**
+ * Renderer
+ */
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-// Animate
+/**
+ * Animate
+ */
 const clock = new THREE.Clock()
 
 const tick = () =>
