@@ -198,7 +198,7 @@ const tick = () =>
     sphere.position.y = Math.abs(Math.sin(elapsedTime * 3))
 
     //update the shadow
-    shpereShadow.position.x = sphere.position.x..............................
+    shpereShadow.position.x = sphere.position.x
     shpereShadow.material.opacity = (1 - sphere.position.y) * 0.3
 
     // Update controls
